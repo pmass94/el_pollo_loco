@@ -9,7 +9,7 @@ class World {
         new Cloud()
     ];
     BackgroundObjects = [
-        new BackgroundObject('img/5.Fondo/Capas/3.Fondo3/1.png', 0, 100)
+        new BackgroundObject('img/5.Fondo/Capas/3.Fondo3/1.png', 0)
     ];
 
     ctx;
@@ -24,10 +24,11 @@ class World {
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
+        this.addObjectsToMap(this.BackgroundObjects);
         this.addToMap(this.character);
         this.addObjectsToMap(this.clouds);
         this.addObjectsToMap(this.enemies);
-        this.addObjectsToMap(this.BackgroundObjects);
+
 
 
 
