@@ -4,7 +4,7 @@ class Coin extends DrawableObject {
     height = 100;
     IMAGES = [
         'img/8.Coin/Moneda1.png',
-        'img/8.Coin/Moneda2.png';
+        'img/8.Coin/Moneda2.png',
     ];
 
     constructor(x,y) {
