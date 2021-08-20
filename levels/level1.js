@@ -92,12 +92,19 @@ const level1 = new Level(
 
     [
         new Botella('img/6.botella/1.Marcador.png', 300),
-        new Botella('img/6.botella/2.Botella_enterrada1.png', 600),
-        new Botella('img/6.botella/2.Botella_enterrada2.png', 900),
+        new Botella('img/6.botella/2.Botella_enterrada1.png', 620),
+        new Botella('img/6.botella/2.Botella_enterrada2.png', 980),
+
         new Botella('img/6.botella/1.Marcador.png', 1380),
-        new Botella('img/6.botella/2.Botella_enterrada1.png', 2600),
+        new Botella('img/6.botella/2.Botella_enterrada1.png', 1720),
         new Botella('img/6.botella/2.Botella_enterrada2.png', 2200),
+
+        new Botella('img/6.botella/1.Marcador.png', 2500),
+        new Botella('img/6.botella/2.Botella_enterrada1.png', 2600),
+        new Botella('img/6.botella/2.Botella_enterrada2.png', 2900),
+
         new Botella('img/6.botella/1.Marcador.png', 3200),
+
     ],
 
 

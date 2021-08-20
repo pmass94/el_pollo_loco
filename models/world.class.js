@@ -8,6 +8,7 @@ class World {
     statusBar = new StatusBar();
     throwableObjects = [];
     coinBar = new CoinBar();
+    botellaBar = new BotellaBar();
     coins = [];
     botellas = [];
 
@@ -76,6 +77,7 @@ class World {
         this.ctx.translate(-this.camera_x, 0);
 
         this.addToMap(this.coinBar);
+        this.addToMap(this.botellaBar);
 
 
 
@@ -132,7 +134,7 @@ class World {
             if (this.character.isCollidingEnemiesAndCollectable(botella)) {
                 this.botellas.push(botella);
                 botellas.splice(index, 1);
-                //this.botellaBar.setPercentage(this.botellas.length);
+                this.botellaBar.setPercentage(this.botellas.length);
                 this.claim_botella.play();
             }
         })
