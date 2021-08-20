@@ -132,7 +132,7 @@ class World {
             if (this.character.isCollidingEnemiesAndCollectable(botella)) {
                 this.botellas.push(botella);
                 botellas.splice(index, 1);
-                this.botellaBar.setPercentage(this.botellas.length);
+                //this.botellaBar.setPercentage(this.botellas.length);
                 this.claim_botella.play();
             }
         })
