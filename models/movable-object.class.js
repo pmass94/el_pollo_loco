@@ -34,6 +34,13 @@ class MovableObject extends DrawableObject {
             this.y < mo.y + mo.height
     }
 
+    isCollidingEnemiesAndCollectable(mo) {
+        return this.x + this.width - 35 > mo.x &&
+            this.y + this.height - 50 > mo.y &&
+            this.x - 70 < mo.x &&
+            this.y + 130 < mo.y + mo.height
+    }
+
     hit() {
         this.energy -= 5;
         if (this.energy < 0) {

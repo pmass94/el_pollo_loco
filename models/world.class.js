@@ -7,7 +7,9 @@ class World {
     camera_x = 0;
     statusBar = new StatusBar();
     throwableObjects = [];
+    coinBar = new CoinBar();
     coins = [];
+    claim_coin = new Audio('audio/coinGrab.mp3');
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -27,7 +29,8 @@ class World {
 
             this.checkCollisions();
             this.checkThrowObjects();
-        }, 200);
+            this.checkCollectedObjects(this.level.coins);
+        }, 1000 / 10);
     }
 
     checkThrowObjects() {
@@ -68,6 +71,8 @@ class World {
 
         this.ctx.translate(-this.camera_x, 0);
 
+        this.addToMap(this.coinBar);
+
 
 
 
@@ -107,6 +112,18 @@ class World {
     flipImageBack(mo) {
         mo.x = mo.x * -1;
         this.ctx.restore();
+
+    }
+
+    checkCollectedObjects(coins) {
+        coins.forEach((coin, index) => {
+            if (this.character.isCollidingEnemiesAndCollectable(coin)) {
+                this.coins.push(coin);
+                coins.splice(index, 1);
+                this.coinBar.setPercentage(this.coins.length);
+                this.claim_coin.play();
+            }
+        });
 
     }
 }

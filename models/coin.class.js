@@ -1,4 +1,4 @@
-class Coin extends DrawableObject {
+class Coin extends MovableObject {
 
     width = 100;
     height = 100;
@@ -20,7 +20,7 @@ class Coin extends DrawableObject {
     animate() {
         setInterval(() => {
             this.playAnimation(this.IMAGES);
-        }, 1000);
+        }, 1000 / 4);
     }
 
 
