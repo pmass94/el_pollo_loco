@@ -82,7 +82,11 @@ const level1 = new Level(
         new Coin(3225, 235),
         new Coin(3260, 270),
 
-    ]
+    ],
+
+    [
+        new Botella('img/6.botella/1.Marcador.png', 300),
+    ],
 
 
 

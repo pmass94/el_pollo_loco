@@ -9,7 +9,10 @@ class World {
     throwableObjects = [];
     coinBar = new CoinBar();
     coins = [];
+    botellas = [];
+
     claim_coin = new Audio('audio/coinGrab.mp3');
+    claim_botella = new Audio('audio/claimBotella.mp3');
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -29,7 +32,7 @@ class World {
 
             this.checkCollisions();
             this.checkThrowObjects();
-            this.checkCollectedObjects(this.level.coins);
+            this.checkCollectedObjects(this.level.coins, this.level.botellas);
         }, 1000 / 10);
     }
 
@@ -68,6 +71,7 @@ class World {
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.throwableObjects);
         this.addObjectsToMap(this.level.coins);
+        this.addObjectsToMap(this.level.botellas);
 
         this.ctx.translate(-this.camera_x, 0);
 
@@ -115,7 +119,7 @@ class World {
 
     }
 
-    checkCollectedObjects(coins) {
+    checkCollectedObjects(coins, botellas) {
         coins.forEach((coin, index) => {
             if (this.character.isCollidingEnemiesAndCollectable(coin)) {
                 this.coins.push(coin);
@@ -124,6 +128,14 @@ class World {
                 this.claim_coin.play();
             }
         });
+        botellas.forEach((botella, index) => {
+            if (this.character.isCollidingEnemiesAndCollectable(botella)) {
+                this.botellas.push(botella);
+                botellas.splice(index, 1);
+                this.botellaBar.setPercentage(this.botellas.length);
+                this.claim_botella.play();
+            }
+        })
 
     }
 }
