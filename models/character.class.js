@@ -97,17 +97,17 @@ class Character extends MovableObject { //ist Unterkatogerie von MovableObject
     move() {
         if (!this.stopMoving) {
             this.walking_sound.pause();
-            if (this.canMoveRight()) {
+            if (this.isMoveRight()) {
                 if (this.energy > 0) {
                     this.moveRight();
                 }
             }
-            if (this.canMoveLeft()) {
+            if (this.isMoveLeft()) {
                 if (this.energy > 0) {
                     this.moveLeft();
                 }
             }
-            if (this.canJump()) {
+            if (this.isJump()) {
                 if (this.energy > 0) {
                     this.jump();
                 }
@@ -162,15 +162,15 @@ class Character extends MovableObject { //ist Unterkatogerie von MovableObject
         return this.world.keyboard.LEFT;
     }
 
-    canMoveRight() {
+    isMoveRight() {
         return this.isMovingRight() && this.x < this.world.level.level_end_x;
     }
 
-    canMoveLeft() {
+    isMoveLeft() {
         return this.isMovingLeft() && this.x > 120;
     }
 
-    canJump() {
+    isJump() {
         return this.world.keyboard.SPACE && !this.isAboveGround();
     }
 }
