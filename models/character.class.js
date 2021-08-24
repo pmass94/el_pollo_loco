@@ -4,9 +4,9 @@ class Character extends MovableObject { //ist Unterkatogerie von MovableObject
     width = 120;
     y = 150;
 
-    speed = 10; // Geschwindikeit 5
+    speed = 10; 
 
-    IMAGES_WALKING = [ //Laufen Pic's
+    IMAGES_WALKING = [ 
         'img/2.Secuencias_Personaje-Pepe-corrección/2.Secuencia_caminata/W-21.png',
         'img/2.Secuencias_Personaje-Pepe-corrección/2.Secuencia_caminata/W-22.png',
         'img/2.Secuencias_Personaje-Pepe-corrección/2.Secuencia_caminata/W-23.png',
@@ -15,7 +15,7 @@ class Character extends MovableObject { //ist Unterkatogerie von MovableObject
         'img/2.Secuencias_Personaje-Pepe-corrección/2.Secuencia_caminata/W-26.png'
     ];
 
-    IMAGES_JUMPING = [ // Springen Pic's
+    IMAGES_JUMPING = [ 
         'img/2.Secuencias_Personaje-Pepe-corrección/3.Secuencia_salto/J-33.png',
         'img/2.Secuencias_Personaje-Pepe-corrección/3.Secuencia_salto/J-34.png',
         'img/2.Secuencias_Personaje-Pepe-corrección/3.Secuencia_salto/J-35.png',
@@ -25,7 +25,7 @@ class Character extends MovableObject { //ist Unterkatogerie von MovableObject
 
     ];
 
-    IMAGES_DEAD = [ // Tot Pic's
+    IMAGES_DEAD = [ 
         'img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-51.png',
         'img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-52.png',
         'img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-53.png',
@@ -35,7 +35,7 @@ class Character extends MovableObject { //ist Unterkatogerie von MovableObject
         'img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-57.png'
     ];
 
-    IMAGES_HURT = [ //getroffen Pic's
+    IMAGES_HURT = [ 
         'img/2.Secuencias_Personaje-Pepe-corrección/4.Herido/H-41.png',
         'img/2.Secuencias_Personaje-Pepe-corrección/4.Herido/H-42.png',
         'img/2.Secuencias_Personaje-Pepe-corrección/4.Herido/H-43.png'
@@ -91,7 +91,7 @@ class Character extends MovableObject { //ist Unterkatogerie von MovableObject
 
     animate() {
         setInterval(this.move.bind(this), 1000 / 60);
-        setInterval(this.play.bind(this), 167);
+        setInterval(this.play.bind(this), 165);
     }
 
     move() {
