@@ -1,11 +1,11 @@
 class CoinBar extends StatusBar {
  
-    x = 250;
+    
     
     constructor() {
         super().loadImage('img/7.Marcadores/Barra/Marcador moneda/azul/0_.png');
         this.loadImages(this.IMAGES);
-
+        this.x = 250;
         this.setPercentage(0);
     }
 

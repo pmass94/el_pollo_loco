@@ -1,12 +1,23 @@
-class BotellaBar extends StatusBar {
+class BotellaBar extends DrawableObject {
 
-    x = 450;
+    percentage = 0;
 
     constructor() {
         super().loadImage('img/7.Marcadores/Barra/Marcador_botella/Azul/0_.png');
-        this.loadImages(this.IMAGES);
-
+        this.loadImages(this.IMAGES_BOTTLE);
+        this.x = 450;
+        this.y = 0;
+        this.width = 200;
+        this.height = 60;
         this.setPercentage(0);
+    }
+
+    setPercentage(percentage) {
+        this.percentage = percentage;
+        let path = this.IMAGES_BOTTLE[this.resolveImageIndex()]
+        this.img = this.imageCache[path];
+
+
     }
 
     resolveImageIndex() {
@@ -25,7 +36,7 @@ class BotellaBar extends StatusBar {
         }
     }
 
-    IMAGES = [
+    IMAGES_BOTTLE = [
         'img/7.Marcadores/Barra/Marcador_botella/Azul/0_.png',
         'img/7.Marcadores/Barra/Marcador_botella/Azul/20_.png',
         'img/7.Marcadores/Barra/Marcador_botella/Azul/40_.png',
