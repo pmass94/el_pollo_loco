@@ -2,11 +2,19 @@ class MovableObject extends DrawableObject {
     speed = 0.15;
     otherDirection = false;
     speedY = 0;
-    acceleration = 2.5;
+    acceleration = 2;
     energy = 100;
     lastHit = 0;
+    lastIdle = 0;
+    stopMoving = false;
+    
+    
+    
 
-    applyGravity() {
+
+
+
+    applayGravity() {
         setInterval(() => {
             if (this.isAboveGround() || this.speedY > 0) {
                 this.y -= this.speedY;
@@ -16,22 +24,59 @@ class MovableObject extends DrawableObject {
     }
 
     isAboveGround() {
-        if (this instanceof ThrowableObject) { // ThrowableObject should alway fall
+        if (this instanceof ThrowableObject) {
             return true;
         } else {
-            return this.y < 155;
+            return this.y < 150;
         }
     }
 
+    playAnimation(images) {
+        if(!this.stopMoving) {
+
+        let i = this.currentImage % images.length
+        let path = images[i];
+        if(path == 'img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-57.png'){
+            this.stopMoving = true;
+        }
+        this.img = this.imageCache[path];
+        
+        this.currentImage++;
+    }
+    }
 
 
+    moveRight() {
+        this.x += this.speed;
+    }
 
-    // character.isColliding(chicken)
+    moveLeft() {
+        this.x -= this.speed;
+    }
+
+    jump() {
+        this.currentImage = 0;
+        this.speedY = 25;
+    }
+
+    isJumping() {
+        return this.speedY > 0 && this.isAboveGround();
+    }
+
+    isLanding() {
+        return this.speedY < 0 && this.isAboveGround();
+    }
+
+    isInAir() {
+        return this.isJumping() || this.isLanding();
+    }
+
+
     isColliding(mo) {
         return this.x + this.width > mo.x &&
             this.y + this.height > mo.y &&
             this.x < mo.x &&
-            this.y < mo.y + mo.height
+            this.y < mo.y + mo.height;
     }
 
     isCollidingEnemiesAndCollectable(mo) {
@@ -40,6 +85,7 @@ class MovableObject extends DrawableObject {
             this.x - 70 < mo.x &&
             this.y + 130 < mo.y + mo.height
     }
+
 
     hit() {
         this.energy -= 5;
@@ -50,38 +96,27 @@ class MovableObject extends DrawableObject {
         }
     }
 
-    isHurt() {
-        let timepassed = new Date().getTime() - this.lastHit; // difference in ms
-        timepassed = timepassed / 1000; // difference in s
-        return timepassed < 1
-    }
-
     isDead() {
         return this.energy == 0;
     }
 
-
-
-    playAnimation(images) {
-        let i = this.currentImage % images.length;
-        let path = images[i];
-        this.img = this.imageCache[path];
-        this.currentImage++;
+    isHurt() {
+        let timepassed = new Date().getTime() - this.lastHit;
+        timepassed = timepassed / 1000;
+        return timepassed < 0.5;
     }
 
-    moveRight() {
-        this.x += this.speed;
-
-
+    longIdle() {
+            this.lastIdle = new Date().getTime();
+            
     }
 
-    moveLeft() {
-        this.x -= this.speed;
-
+    isLongIdle() {
+        let timepassed = new Date().getTime() - this.lastIdle;
+        timepassed = timepassed / 1000;
+        
+        return timepassed > 5;
     }
 
-    jump() {
-        this.currentImage = 0;
-        this.speedY = 30;
-    }
+    
 }
