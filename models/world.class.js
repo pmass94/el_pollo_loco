@@ -32,17 +32,12 @@ class World {
         setInterval(() => {
 
             this.checkCollisions();
-            this.checkThrowObjects();
             this.checkCollectedObjects(this.level.coins, this.level.botellas);
+            this.checkThrowableObjects();
         }, 1000 / 10);
     }
 
-    checkThrowObjects() {
-        if(this.keyboard.D){
-            let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
-            this.throwableObjects.push(bottle);
-        }
-    }
+
 
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
@@ -139,5 +134,17 @@ class World {
             }
         })
 
+    }
+
+
+    checkThrowableObjects() {
+        if (this.keyboard.D && !this.character.isDead() && !this.character.otherDirection && this.botellas.length > 0) {
+            this.botellaBottle = new ThrowableObject(this.character.x + 100, this.character.y + 100, this.character.otherDirection);
+            this.throwableObjects.push(this.botellaBottle);
+            this.botellas.splice(0, 1);
+            this.botellaBar.setPercentage(this.botellas.length);
+
+        } 
+        //this.checkCollisionWithThrowableObject();
     }
 }
