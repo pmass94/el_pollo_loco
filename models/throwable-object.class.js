@@ -1,13 +1,20 @@
 class ThrowableObject extends MovableObject {
 
-    constructor(x, y, otherDirection) {
-        super().loadImage('img/7.Marcadores/Icono/Botella.png')
+    IMAGES_BOTTLES = [
+        'img/6.botella/Rotación/Mesa de trabajo 1 copia 3.png',
+        'img/6.botella/Rotación/Mesa de trabajo 1 copia 4.png',
+        'img/6.botella/Rotación/Mesa de trabajo 1 copia 5.png',
+        'img/6.botella/Rotación/Mesa de trabajo 1 copia 6.png'
+    ];
 
+    constructor(x, y, otherDirection) {
+        super().loadImage('img/6.botella/Rotación/Mesa de trabajo 1 copia 3.png')
+        this.loadImages(this.IMAGES_BOTTLES);
         this.otherDirection = otherDirection
         this.x = x;
         this.y = y;
-        this.height = 60;
-        this.width = 50;
+        this.height = 80;
+        this.width = 64;
         this.throw();
 
 
@@ -15,16 +22,33 @@ class ThrowableObject extends MovableObject {
 
 
     throw() {
-        this.speedY = 18;
+        this.speedY = 21;
         this.applyGravity();
 
         setInterval(() => {
             if (this.otherDirection) {
-                this.x -= 10;
+                this.x -= 9;
             } else {
-                this.x += 15;
+                this.x += 14;
             }
 
         }, 25);
+        this.animate();
     }
+
+    animate() {
+        setInterval(() => {
+            this.play();
+        }, 100);
+    }
+
+    play() {
+        this.playAnimation(this.IMAGES_BOTTLES);
+    }
+
+
+
+
+
+
 }
