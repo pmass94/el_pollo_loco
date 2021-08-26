@@ -4,9 +4,9 @@ class Character extends MovableObject { //ist Unterkatogerie von MovableObject
     width = 120;
     y = 150;
 
-    speed = 10; 
+    speed = 10;
 
-    IMAGES_WALKING = [ 
+    IMAGES_WALKING = [
         'img/2.Secuencias_Personaje-Pepe-corrección/2.Secuencia_caminata/W-21.png',
         'img/2.Secuencias_Personaje-Pepe-corrección/2.Secuencia_caminata/W-22.png',
         'img/2.Secuencias_Personaje-Pepe-corrección/2.Secuencia_caminata/W-23.png',
@@ -15,7 +15,7 @@ class Character extends MovableObject { //ist Unterkatogerie von MovableObject
         'img/2.Secuencias_Personaje-Pepe-corrección/2.Secuencia_caminata/W-26.png'
     ];
 
-    IMAGES_JUMPING = [ 
+    IMAGES_JUMPING = [
         'img/2.Secuencias_Personaje-Pepe-corrección/3.Secuencia_salto/J-33.png',
         'img/2.Secuencias_Personaje-Pepe-corrección/3.Secuencia_salto/J-34.png',
         'img/2.Secuencias_Personaje-Pepe-corrección/3.Secuencia_salto/J-35.png',
@@ -25,7 +25,7 @@ class Character extends MovableObject { //ist Unterkatogerie von MovableObject
 
     ];
 
-    IMAGES_DEAD = [ 
+    IMAGES_DEAD = [
         'img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-51.png',
         'img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-52.png',
         'img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-53.png',
@@ -35,7 +35,7 @@ class Character extends MovableObject { //ist Unterkatogerie von MovableObject
         'img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-57.png'
     ];
 
-    IMAGES_HURT = [ 
+    IMAGES_HURT = [
         'img/2.Secuencias_Personaje-Pepe-corrección/4.Herido/H-41.png',
         'img/2.Secuencias_Personaje-Pepe-corrección/4.Herido/H-42.png',
         'img/2.Secuencias_Personaje-Pepe-corrección/4.Herido/H-43.png'
@@ -70,6 +70,7 @@ class Character extends MovableObject { //ist Unterkatogerie von MovableObject
 
     world;
     walking_sound = new Audio('audio/running.mp3');
+    jumping_sound = new Audio('audio/jumping.mp3');
 
     stopMoving = false;
 
@@ -97,19 +98,23 @@ class Character extends MovableObject { //ist Unterkatogerie von MovableObject
     move() {
         if (!this.stopMoving) {
             this.walking_sound.pause();
+
             if (this.isMoveRight()) {
                 if (this.energy > 0) {
                     this.moveRight();
+                    this.walking_sound.play();
                 }
             }
             if (this.isMoveLeft()) {
                 if (this.energy > 0) {
                     this.moveLeft();
+                    this.walking_sound.play();
                 }
             }
             if (this.isJump()) {
                 if (this.energy > 0) {
                     this.jump();
+                    this.jumping_sound.play();
                 }
             }
             this.world.camera_x = -this.x + 120;
@@ -120,15 +125,16 @@ class Character extends MovableObject { //ist Unterkatogerie von MovableObject
         super.moveRight();
         this.otherDirection = false;
 
-        this.walking_sound.play();
     }
 
     moveLeft() {
         super.moveLeft();
         this.otherDirection = true;
-        this.walking_sound.play();
 
     }
+
+
+
 
     play() {
         if (super.isDead()) {
