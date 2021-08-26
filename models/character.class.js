@@ -1,4 +1,4 @@
-class Character extends MovableObject { //ist Unterkatogerie von MovableObject
+class Character extends MovableObject { 
 
     height = 280;
     width = 120;
@@ -84,8 +84,8 @@ class Character extends MovableObject { //ist Unterkatogerie von MovableObject
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_IDLE);
         this.loadImages(this.IMAGES_LONGIDLE);
-        super.applyGravity(); //lade Gravitation
-        this.animate(); // lade animaton
+        super.applyGravity(); 
+        this.animate(); 
         super.longIdle();
 
     }
