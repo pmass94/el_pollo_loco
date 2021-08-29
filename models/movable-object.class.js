@@ -86,6 +86,13 @@ class MovableObject extends DrawableObject {
             this.y + 130 < mo.y + mo.height
     }
 
+    /*isCollidingEndboss(mo) {
+        return this.x + this.width - 35 > mo.x &&
+            this.y + this.height - 50 > mo.y + 150 &&
+            this.x - 70 < mo.x &&
+            this.y + 130 < mo.y + mo.height - 100
+    }*/
+
 
     hit() {
         this.energy -= 5;
