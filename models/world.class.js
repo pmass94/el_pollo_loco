@@ -9,6 +9,7 @@ class World {
     throwableObjects = [];
     coinBar = new CoinBar();
     botellaBar = new BotellaBar();
+    endbossHealthBar = new Endbossbar();
     coins = [];
     botellas = [];
 
@@ -73,6 +74,7 @@ class World {
 
         this.addToMap(this.coinBar);
         this.addToMap(this.botellaBar);
+        this.addToMap(this.endbossHealthBar);
 
 
 
