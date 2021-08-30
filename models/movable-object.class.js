@@ -7,9 +7,9 @@ class MovableObject extends DrawableObject {
     lastHit = 0;
     lastIdle = 0;
     stopMoving = false;
-    
-    
-    
+
+
+
 
 
 
@@ -26,23 +26,26 @@ class MovableObject extends DrawableObject {
     isAboveGround() {
         if (this instanceof ThrowableObject) {
             return true;
+        } else if (this instanceof Endboss) {
+            return false;
+
         } else {
             return this.y < 150;
         }
     }
 
     playAnimation(images) {
-        if(!this.stopMoving) {
+        if (!this.stopMoving) {
 
-        let i = this.currentImage % images.length
-        let path = images[i];
-        if(path == 'img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-57.png'){
-            this.stopMoving = true;
+            let i = this.currentImage % images.length
+            let path = images[i];
+            if (path == 'img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-57.png') {
+                this.stopMoving = true;
+            }
+            this.img = this.imageCache[path];
+
+            this.currentImage++;
         }
-        this.img = this.imageCache[path];
-        
-        this.currentImage++;
-    }
     }
 
 
@@ -86,12 +89,13 @@ class MovableObject extends DrawableObject {
             this.y + 130 < mo.y + mo.height
     }
 
-    /*isCollidingEndboss(mo) {
+    isCollidingEndboss(mo) {
         return this.x + this.width - 35 > mo.x &&
-            this.y + this.height - 50 > mo.y + 150 &&
-            this.x - 70 < mo.x &&
-            this.y + 130 < mo.y + mo.height - 100
-    }*/
+        this.y + this.height - 50 > mo.y &&
+        this.x - 70 < mo.x &&
+        this.y + 130 < mo.y + mo.height
+    }
+
 
 
     hit() {
@@ -101,6 +105,14 @@ class MovableObject extends DrawableObject {
         } else {
             this.lastHit = new Date().getTime();
         }
+    }
+
+    isLastHit() {
+        let timePassed;
+        timePassed = new Date().getTime() - this.lastHit;
+
+        timePassed = timePassed / 1000;
+        return this.energy <= 0 && timePassed < 0.3;
     }
 
     isDead() {
@@ -114,16 +126,16 @@ class MovableObject extends DrawableObject {
     }
 
     longIdle() {
-            this.lastIdle = new Date().getTime();
-            
+        this.lastIdle = new Date().getTime();
+
     }
 
     isLongIdle() {
         let timepassed = new Date().getTime() - this.lastIdle;
         timepassed = timepassed / 1000;
-        
+
         return timepassed > 5;
     }
 
-    
+
 }

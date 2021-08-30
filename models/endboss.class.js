@@ -43,9 +43,9 @@ class Endboss extends MovableObject {
     ];
 
     IMAGES_HURT = [
-        'img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/4.Muerte/G21.png',
-        'img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/4.Muerte/G22.png',
-        'img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/4.Muerte/G23.png',
+        'img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/3.Herida/G21.png',
+        'img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/3.Herida/G22.png',
+        'img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/3.Herida/G23.png',
     ];
 
     IMAGES_DEAD = [
@@ -56,22 +56,48 @@ class Endboss extends MovableObject {
 
 
     constructor() {
-        super().loadImage(this.IMAGES_ALERTA[0]);
-        this.loadImages(this.IMAGES_WALKING);      
+        super().loadImage('img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/2.Ateción-ataque/1.Alerta/G5.png');
         this.loadImages(this.IMAGES_ALERTA);
+        this.loadImages(this.IMAGES_WALKING);      
         this.loadImages(this.IMAGES_ATTACK);
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_DEAD);
 
         this.x = 4000;
         this.animate();
+        this.applyGravity();
 
     }
 
     animate() {
 
         setInterval(() => {
-            this.playAnimation(this.IMAGES_ALERTA);
-        }, 200);
+            if (this.endbossWalking() && !this.isDead()) {
+                this.x -= 7;
+            }
+        }, 1000 / 60);
+
+        setInterval(() => {
+
+            if (this.isDead()) {
+                this.playAnimation(this.IMAGES_DEAD);
+            }
+            if (this.isLastHit()) {
+                this.death(15, 1);
+            } else if (this.isHurt() && !this.isDead()) {
+                this.playAnimation(this.IMAGES_HURT);
+            } else if (this.endbossWalking() && !this.isDead()) {
+                this.playAnimation(this.IMAGES_WALKING);
+            } else if (!this.isDead()) {
+                this.playAnimation(this.IMAGES_ALERTA);
+            }
+        }, 150);
+    }
+
+    endbossWalking() {
+        let timePassed = new Date().getTime() - this.lastHit;
+        timePassed = timePassed / 1000;
+
+        return timePassed > 1 && timePassed < 1.5;
     }
 }

@@ -36,7 +36,8 @@ class World {
             this.checkCollisions();
             this.checkCollectedObjects(this.level.coins, this.level.botellas);
             this.checkThrowableObjects();
-            /*this.checkDistanceToEnemy();*/
+            this.checkEndbossHit();
+
         }, 1000 / 10);
     }
 
@@ -46,15 +47,9 @@ class World {
                 this.character.hit();
                 this.statusBar.setPercentage(this.character.energy);
             }
-        })
+        });
 
-        /*if (this.character.isCollidingEndboss(this.endboss) && !this.endboss.isDead()) {
-            this.character.hit();
-            
-            this.character.collision = true;
-            this.character.x -= 5;
-        }
-        this.healthBar.setPercentage(this.character.energy);*/
+
     }
 
     checkCollectedObjects(coins, botellas) {
@@ -85,22 +80,19 @@ class World {
             this.botellaBar.setPercentage(this.botellas.length);
 
         }
-        //this.checkCollisionWithThrowableObject();
+
     }
 
+    checkEndbossHit() {
+        this.throwableObjects.forEach(botellaBottle => {
+            if (this.level.endboss.isColliding(botellaBottle)) {
+                this.level.endboss.hit(50);
+                this.throwableObjects.splice(this.throwableObjects.indexOf(botellaBottle));
+            }
+        });
 
+    }
 
-
-    /*checkDistanceToEnemy() {
-        if (this.character.isNear(this.endboss, 300) && !this.endboss.isDead() ) {
-            this.endboss.animateIntro();
-            //code sound
-            //code
-
-            this.endboss.otherDirection = false;
-            this.endboss.x -= this.endboss.speedX;
-        }
-    }*/
 
 
 
@@ -126,6 +118,7 @@ class World {
         this.addObjectsToMap(this.throwableObjects);
         this.addObjectsToMap(this.level.coins);
         this.addObjectsToMap(this.level.botellas);
+
 
         this.ctx.translate(-this.camera_x, 0);
 
@@ -175,6 +168,3 @@ class World {
 
     }
 }
-
-
-
