@@ -1,38 +1,38 @@
-class DrawableObject  {
+class DrawableObject {
     x = 120;
-    y = 280;
-    height = 150;
-    width = 100;
+    y = 100;
     img;
-    imageCache = [];
+    width = 120;
+    height = 280;
+    imageCache = {};
     currentImage = 0;
-    currentImageJump = 0;
-
 
     loadImage(path) {
         this.img = new Image();
         this.img.src = path;
     }
 
-    draw(ctx) {
-        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
-    }
-
     loadImages(arr) {
-        arr.forEach(path => {
+        arr.forEach((path) => {
             let img = new Image();
             img.src = path;
             this.imageCache[path] = img;
         });
     }
 
+    draw(ctx) {
+        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+    }
+
+    //frame which makes it easier to code collisons
     drawFrame(ctx) {
-        if (this instanceof Character || this instanceof Chicken || this instanceof Endboss || this instanceof ThrowableObject || this instanceof Coin) {
+        if (this instanceof Character || this instanceof Chicken || this instanceof Endboss || this instanceof ThrowableObject) {
             ctx.beginPath();
             ctx.lineWidth = '5';
-            ctx.strokeStyle = 'blue';
+            ctx.strokeStyle = 'transparent';
             ctx.rect(this.x, this.y, this.width, this.height);
             ctx.stroke();
         }
     }
+
 }
