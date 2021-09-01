@@ -143,6 +143,14 @@ canvas {
     font-size: 24px;
 }
 
+.manual-touchpad {
+    position: absolute;
+    top: 48px;
+    right: 48px;
+    display: flex;
+    justify-content: space-between;
+}
+
 /*-- Smartphones --*/
 
 @media only screen and (max-width: 719px) {
@@ -209,10 +217,11 @@ canvas {
         align-items: center;
     }
 
-    #manual-touch{
-        left:235px;
-        bottom:20%;
-    }
+    .manual-touchpad {
+        top: 0px;
+        right: 50%;
+        font-size: 9px;}
+
     #right-pad {
         left: 135px;
         bottom: 1%;
