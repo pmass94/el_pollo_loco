@@ -74,6 +74,10 @@ canvas {
     justify-content: space-between;
 }
 
+.manual-touchpad {
+    display: none!important;
+}
+
 .mute {
     margin: 12px;
     display: flex;
@@ -143,14 +147,6 @@ canvas {
     font-size: 24px;
 }
 
-.manual-touchpad {
-    position: absolute;
-    top: 48px;
-    right: 48px;
-    display: flex;
-    justify-content: space-between;
-}
-
 /*-- Smartphones --*/
 
 @media only screen and (max-width: 719px) {
@@ -188,7 +184,6 @@ canvas {
         display: flex;
         justify-content: center;
     }
-
     .manual {
         display: none;
     }
@@ -216,12 +211,6 @@ canvas {
         justify-content: center;
         align-items: center;
     }
-
-    .manual-touchpad {
-        top: 0px;
-        right: 50%;
-        font-size: 9px;}
-
     #right-pad {
         left: 135px;
         bottom: 1%;
@@ -240,8 +229,20 @@ canvas {
     }
     .sound {
         top: 0px;
-        right: 10%;
+        right: 15%;
         font-size: 9px;
+    }
+    .manual-touchpad {
+        display: flex !important;
+        position: absolute;
+        justify-content: center;
+        background-color: rgba(0, 0, 0, 0.2);
+        border-radius: 33%;
+        color: white;
+        padding:10px;
+        top: 3px;
+        right: 31%;
+        font-size: 8px;
     }
     .sound img {
         height: 24px;

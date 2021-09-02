@@ -21,6 +21,7 @@ function startGame() {
     document.getElementById('fullscreen').classList.remove('d-none');
     document.getElementById('mute1').classList.remove('d-none');
     document.getElementById('mute2').classList.remove('d-none');
+    document.getElementById('touchpad').classList.remove('d-none');
     document.getElementById('manual').classList.remove('d-none');
     canvas = document.getElementById('canvas');
     level1 = initLevel1();
