@@ -150,7 +150,7 @@ class Endboss extends MovableObject {
     pressedD() {
         let timepassed = new Date().getTime() - this.lastTimePressedD;
         timepassed = timepassed / 1000;
-        return timepassed < 2;
+        return timepassed < 4;
     }
 
 
