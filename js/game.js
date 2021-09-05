@@ -109,7 +109,6 @@ function listenForTouches() {
 
 }
 
-
 //Fullscreen
 function goFullScreen() {
     canvas.requestFullscreen();
@@ -135,6 +134,7 @@ function muteMusic() {
     }   
 }
 
+// When sound is muted
 function muteSound() {
     if(world.AUDIO_CHICKEN.muted == false) {
         document.getElementById('sound').src = "icon/mute.png";
