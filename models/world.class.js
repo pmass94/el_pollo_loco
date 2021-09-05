@@ -272,7 +272,7 @@ class World {
     }
 
     chickenisNear(chicken, i) {
-        return this.character.x > chicken[i].x - 150 &&
+        return this.character.x > chicken[i].x - 120 &&
             this.character.x + this.character.width < chicken[i].x + chicken[i].width;
     }
 

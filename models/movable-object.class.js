@@ -10,7 +10,7 @@ class MovableObject extends DrawableObject {
     AUDIO_BOTTLE = new Audio('audio/bottle.mp3');
     AUDIO_COIN = new Audio('audio/coin.mp3');
 
-
+    // Colliding with chicken, endboss and bottles
     isColliding(mo) {
         return this.x + this.width - 35 > mo.x &&
             this.y + this.height + 20 > mo.y &&
@@ -18,6 +18,7 @@ class MovableObject extends DrawableObject {
             this.y < mo.y + mo.height;
     }
 
+    // Colliding with coins
     isCollidingCoin(mo) {
         return this.x + this.width - 35 > mo.x &&
             this.y + this.height - 50 > mo.y &&
@@ -25,6 +26,7 @@ class MovableObject extends DrawableObject {
             this.y + 130 < mo.y + mo.height;
     }
 
+    // Damage taken by chicken
     hit() {
         this.energy -= 5;
         if (this.energy < 0) {
@@ -34,6 +36,7 @@ class MovableObject extends DrawableObject {
         }
     }
 
+    // Damage taken by endboss
     hitByEndboss() {
         this.energy -= 40;
         if (this.energy < 0) {
@@ -43,6 +46,7 @@ class MovableObject extends DrawableObject {
         }
     }
 
+    // Time playing images when hurt
     isHurt() {
         let timepassed = new Date().getTime() - this.lastCollision;
         timepassed = timepassed / 1000;

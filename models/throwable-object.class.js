@@ -23,9 +23,10 @@ class ThrowableObject extends MovableObject {
         setInterval(() => {
             this.x += 10; 
         }, 25);
-        //this.AUDIO_THROWING.play();
+
         setInterval(() => {
             this.playAnimation(this.IMAGE_ROTATION_BOTTLE);
         }, 100); 
+        //this.AUDIO_THROWING.play();
     }
 }
