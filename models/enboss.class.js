@@ -71,7 +71,7 @@ class Endboss extends MovableObject {
                 this.otherDirection = false;
                 this.moveLeft();
                 this.endbossBar.x = this.x + 100;
-            } 
+            }
 
         }, 1000 / 60);
 
@@ -97,7 +97,7 @@ class Endboss extends MovableObject {
                 setTimeout(() => {
                     this.dead = true;
                 }, 1000);
-            } else if (!this.bottleAvailable && this.x <= 6000 && !this.killedCharacter ) {
+            } else if (!this.bottleAvailable && this.x <= 6000 && !this.killedCharacter) {
                 this.playAnimation(this.IMAGES_ATTACK);
                 this.AUDIO_SCREAM.play();
                 this.AUDIO_SCREAM.volume = 0.2;
@@ -123,7 +123,7 @@ class Endboss extends MovableObject {
             }
         }, 200);
     }
-
+    // Damage of the bottle on the endboss
     hitEndboss() {
         this.energyEndboss -= 4;
         if (this.energyEndboss < 0) {
@@ -134,16 +134,19 @@ class Endboss extends MovableObject {
         console.log(this.energyEndboss);
     }
 
+    // Play images of hurt endboss
     endbossIsHurt() {
         let timepassed = new Date().getTime() - this.lastCollisionEndboss;
         timepassed = timepassed / 1000;
         return timepassed < 0.25;
     }
 
+    // Dead endboss
     endbossIsDead() {
         return this.energyEndboss == 0;
     }
 
+    //Time between throwing a new bottle
     pressedD() {
         let timepassed = new Date().getTime() - this.lastTimePressedD;
         timepassed = timepassed / 1000;
