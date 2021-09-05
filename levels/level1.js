@@ -39,6 +39,7 @@ function initLevel1() {
         coins.push(new Coin(x, y));
     }
     
+    //Background
     return new Level(
             enemies,
         
