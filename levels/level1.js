@@ -9,11 +9,11 @@ function initLevel1() {
     let y = 0;
     
     //Enemies
-    for(let i = 0; i < 12; i++) {
+    for(let i = 0; i < 15; i++) {
         enemies.push(new Chicken());
     }
     
-    for(let i = 0; i < 7; i++) {
+    for(let i = 0; i < 5; i++) {
         enemies.push(new Chick());
     }
     

@@ -132,7 +132,6 @@ class World {
             this.checkCollisionEndboss();
             this.timePassedSinceThrowEvent();
             this.checkChickenPosition();
-            this.checkCharacterPassedEndboss();
             this.checkIfCharacterIsDead();
             this.checkIfGameOver();
         }, 200);
@@ -252,16 +251,7 @@ class World {
             this.character.x + this.character.width < this.endBoss.x + this.endBoss.width;
     }
 
-    //check if Character infront or behind Endboss
-    checkCharacterPassedEndboss() {
-        if(this.escapedEndboss()){
-            this.endBoss.characterEscaped = true;
-        }
-    }
 
-    escapedEndboss(){
-        return this.character.x > this.endBoss.x
-    }
 
     //check if Key D has been pressed
     timePassedSinceThrowEvent() {
