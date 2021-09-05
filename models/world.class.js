@@ -9,8 +9,7 @@ class World {
     bottleBar = new BottleBar();
     coinBar = new CoinBar();
     throwableObjects = [];
-    endBoss = this.level.enemies[this.level.enemies.length - 1];   
-    //gameOver = new GameOver();
+    endBoss = this.level.enemies[this.level.enemies.length - 1];
     gameOver;
 
     AUDIO_CHICKEN = new Audio('audio/chicken.mp3');
@@ -28,23 +27,23 @@ class World {
         this.checkCollision();
         this.checkCollisonBottle();
         this.run();
-        
+
         //AUDIO
         //audio world
         this.AUDIO_GAMEOVER.pause();
         this.AUDIO_GAMEOVER.muted = false;
         this.AUDIO_BACKGROUND.play();
-        this.AUDIO_BACKGROUND.volume = 0.5; 
+        this.AUDIO_BACKGROUND.volume = 0.5;
         this.AUDIO_BACKGROUND.muted = false;
         this.AUDIO_CHICKEN.muted = false;
-        //audio Character
+        //audio character
         this.character.AUDIO_WALKING.muted = false;
         this.character.AUDIO_HURTING.muted = false;
         this.character.AUDIO_JUMPING.muted = false;
-        //audio Endboss
+        //audio endboss
         this.endBoss.AUDIO_SCREAM.muted = false;
         this.endBoss.AUDIO_HURT.muted = false;
-        //audio MovabelObject
+        //audio bottle and coin
         this.character.AUDIO_BOTTLE.muted = false;
         this.character.AUDIO_COIN.muted = false;
 
@@ -62,19 +61,19 @@ class World {
         this.addObjectsToMap(this.level.backgroundObjects);
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.enemies);
-        if (!this.endBoss.dead){
+        if (!this.endBoss.dead) {
             this.addToMap(this.endBoss.endbossBar);
         }
         this.addObjectsToMap(this.throwableObjects);
         this.addObjectsToMap(this.level.bottles);
         this.addObjectsToMap(this.level.coins);
-      
+
         this.ctx.translate(-this.camera_x, 0);
         //-----space for fixed objects-----
         this.addToMap(this.statusBar);
         this.addToMap(this.bottleBar);
         this.addToMap(this.coinBar);
-       
+
         if (this.gameOver.gameFinished) {
             this.addToMap(this.gameOver);
         }
@@ -137,7 +136,7 @@ class World {
         }, 200);
     }
 
-    //Collision with chickens
+    //Collision with chickens and removing dead chickens from game
     checkCollision() {
         this.level.enemies.forEach((enemy, index) => {
             if (enemy.chickenAlive) {
@@ -151,11 +150,9 @@ class World {
             }
         });
     }
-
     chickenDied(enemy) {
-         enemy.chickenAlive = false;
+        enemy.chickenAlive = false;
     }
-
     removeChicken(enemy) {
         setTimeout(() => {
             let position = this.level.enemies.indexOf(enemy);
@@ -173,11 +170,9 @@ class World {
             }
         })
     }
-
     removeBottle(index) {
         this.level.bottles.splice(index, 1);
     }
-
     throwBottle() {
         if (this.keyboard.KEY_D && this.bottleBar.percentage > 0) {
             let bottle = new ThrowableObject(this.character.x + 20, this.character.y + 80);
@@ -198,7 +193,6 @@ class World {
             }
         })
     }
-
     removeCoin(index) {
         this.level.coins.splice(index, 1);
     }
@@ -219,7 +213,6 @@ class World {
             }
         })
     }
-
     isCollidingBottle(bottle) {
         return bottle.x + bottle.width > this.endBoss.x &&
             bottle.y + bottle.height < this.endBoss.y + this.endBoss.height - 80 &&
@@ -227,7 +220,7 @@ class World {
             bottle.x + bottle.width < this.endBoss.x + this.endBoss.width;
     }
 
-
+    // Check if bottles are available
     checkBottleAvailable() {
         if (this.bottleBar.percentage == 0) {
             this.endBoss.bottleAvailable = false;
@@ -243,7 +236,6 @@ class World {
             this.statusBar.setPercentage(this.character.energy);
         }
     }
-
     isCollidingEndboss() {
         return this.character.x + this.character.width > this.endBoss.x &&
             this.character.y + this.character.height < this.endBoss.y + this.endBoss.height &&
@@ -253,7 +245,7 @@ class World {
 
 
 
-    //check if Key D has been pressed
+    //check if key D has been pressed
     timePassedSinceThrowEvent() {
         if (this.keyboard.KEY_D) {
             this.endBoss.lastTimePressedD = new Date().getTime();
@@ -266,22 +258,24 @@ class World {
         for (let i = 0; i < chicken.length - 1; i++) {
             if (this.chickenisNear(chicken, i) && !this.gameOver.gameFinished) {
                 this.AUDIO_CHICKEN.play();
-                this.AUDIO_CHICKEN.volume = 0.2;  
+                this.AUDIO_CHICKEN.volume = 0.2;
             }
         }
     }
-
     chickenisNear(chicken, i) {
         return this.character.x > chicken[i].x - 120 &&
             this.character.x + this.character.width < chicken[i].x + chicken[i].width;
     }
 
+
+    // Check if character is dead
     checkIfCharacterIsDead() {
         if (this.character.dead) {
             this.endBoss.killedCharacter = true;
         }
     }
 
+    // Play audio when games is finished
     checkIfGameOver() {
         if (this.character.dead || this.endBoss.dead) {
             this.gameOver.gameFinished = true;
@@ -290,7 +284,6 @@ class World {
             this.AUDIO_BACKGROUND.pause();
             this.AUDIO_GAMEOVER.play();
             this.AUDIO_GAMEOVER.volume = 1;
-            this.AUDIO_GAMEOVER.loop = false;
         }
     }
 }
