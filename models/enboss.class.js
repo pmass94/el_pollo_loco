@@ -146,11 +146,11 @@ class Endboss extends MovableObject {
         return this.energyEndboss == 0;
     }
 
-    //Time between throwing a new bottle
+    //Time before chicken is going to attack again after beeing hurt
     pressedD() {
         let timepassed = new Date().getTime() - this.lastTimePressedD;
         timepassed = timepassed / 1000;
-        return timepassed < 4;
+        return timepassed < 2;
     }
 
 
